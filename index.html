@@ -135,6 +135,20 @@ tbody tr:hover{background:#142846}
 .fb-status.error i{background:var(--red)}
 .fb-status.loading i{background:var(--amber);animation:pulse 1.1s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* Authentication gate */
+.auth-gate{position:fixed;inset:0;z-index:100;background:#071326f5;display:none;align-items:center;justify-content:center;padding:20px}
+.auth-gate.show{display:flex}
+.auth-card{width:min(100%,420px);background:#112240;border:1px solid #263750;border-radius:16px;padding:28px;box-shadow:0 25px 80px #0008}
+.auth-brand{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.auth-card h2{font-size:21px;margin:0 0 8px}.auth-card p{font-size:12px;color:#94a3b8;line-height:1.6;margin:0 0 20px}
+.auth-card label{display:block;color:#cbd5e1;font-size:12px;margin:13px 0 6px}
+.auth-card input{width:100%;padding:11px 12px;background:#0a192f;color:#f8fafc;border:1px solid #263750;border-radius:8px;outline:none}
+.auth-card input:focus{border-color:#3b82f6}.auth-submit{width:100%;justify-content:center;margin-top:18px}
+.auth-switch{width:100%;justify-content:center;margin-top:10px;background:transparent;border-color:transparent}
+.auth-error{display:none;margin-top:12px;padding:10px;border-radius:8px;background:#2e1416;color:#fca5a5;font-size:12px;line-height:1.5}
+.signout-btn{margin-left:auto;background:transparent;border:1px solid #263750;color:#94a3b8;border-radius:6px;padding:5px 8px;font-size:10px}
+
 @media(max-width:1180px){.sidebar{width:220px}.main{margin-left:220px;width:calc(100% - 220px)}.content{padding:25px 23px}.topbar{padding:0 23px}.kpis{gap:11px}.kpi{padding:16px}.kpi-value{font-size:26px}.panels{grid-template-columns:minmax(0,1.4fr) minmax(260px,1fr)}.status-content{gap:10px}.donut{width:130px;height:130px}}
 @media(max-width:900px){.sidebar{transform:translateX(-100%);transition:transform .2s;width:246px;box-shadow:15px 0 35px #0004}.sidebar.open{transform:translateX(0)}.main{margin-left:0;width:100%}.mobile-menu{display:grid}.topbar{padding:0 20px}.content{padding:24px 20px}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.panels{grid-template-columns:1fr}.chart-wrap{height:220px}.status-content{justify-content:flex-start;padding-left:12%}.bottom-grid{grid-template-columns:1fr}}
 @media(max-width:560px){.topbar{height:64px;padding:0 14px}.breadcrumb{display:none}.top-actions{gap:8px}.search{width:min(48vw,190px)}.search input{padding:9px 8px 9px 32px}.content{padding:22px 14px}.page-head{align-items:flex-start;flex-direction:column}.head-actions{width:100%}.head-actions .btn{flex:1;justify-content:center}h1{font-size:24px}.kpis{gap:10px}.kpi{min-height:133px;padding:14px}.kpi-label{font-size:11px}.kpi-icon{width:30px;height:30px}.kpi-value{font-size:24px;margin:12px 0 7px}.kpi-foot{font-size:10px}.panel{padding:16px}.chart-wrap{height:185px}.status-content{padding-left:0;gap:12px}.donut{width:128px;height:128px}.status-legend{gap:12px}.table-head{padding:16px}.table-head .panel-title{font-size:12px}.demo-note{align-items:flex-start;line-height:1.5}.table-panel{border-radius:10px}.footer{padding-bottom:12px}}
@@ -150,7 +164,7 @@ tbody tr:hover{background:#142846}
   <div class="nav-label">WORKSPACE</div>
   <nav class="nav" id="mainNav">
     <button class="active" data-page="Dashboard"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="8" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="15" width="7" height="6" rx="1"/></svg>Dashboard</button>
-    <button data-page="Devices"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>Devices <span class="nav-count">128</span></button>
+    <button data-page="Devices"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>Devices <span class="nav-count">0</span></button>
     <button data-page="Support Tickets"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-5 4v-4.5a2.5 2.5 0 0 1-1-2z"/><path d="M8 8h8M8 12h5"/></svg>Support Tickets <span class="nav-count" id="ticketNavCount">12</span></button>
     <button data-page="Customers / Organizations"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Customers</button>
     <button data-page="Remote Support"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4M8 10l2 2 5-5"/></svg>Remote Support</button>
@@ -160,8 +174,8 @@ tbody tr:hover{background:#142846}
     <button data-page="Settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.6a7.7 7.7 0 0 1-1.8 1l-.3 1.8h-2.8l-.3-1.8a7.7 7.7 0 0 1-1.8-1l-1.7.6-1.4-2.4 1.4-1.1A7.6 7.6 0 0 1 7 13l-1.7-.7v-2.8L7 8.8a7.6 7.6 0 0 1 .7-1.8L6.3 5.6l1.4-2.4 1.7.6a7.7 7.7 0 0 1 1.8-1l.3-1.8h2.8l.3 1.8a7.7 7.7 0 0 1 1.8 1l1.7-.6 1.4 2.4-1.4 1.4a7.6 7.6 0 0 1 .7 1.8l1.7.7v2.8L19 13a7.6 7.6 0 0 1 .4 2z" transform="translate(-1 1) scale(.94)"/></svg>Settings</button>
   </nav>
   <div class="sidebar-bottom">
-    <div class="plan"><div class="plan-head"><span>Workspace usage</span><span class="plan-badge">DEMO</span></div><p>128 of 200 device slots in use.</p><div class="progress"><span></span></div></div>
-    <div class="user"><div class="avatar">MG</div><div><div class="user-name">Workspace Admin</div><div class="user-role">IT Administrator</div></div><div class="user-more">•••</div></div>
+    <div class="plan"><div class="plan-head"><span>Workspace usage</span><span class="plan-badge">SETUP</span></div><p>Device inventory setup required.</p><div class="progress"><span></span></div></div>
+    <div class="user"><div class="avatar">MG</div><div><div class="user-name">Workspace Admin</div><div class="user-role" id="signedInEmail">Signed in</div></div><button class="signout-btn" id="signOutBtn" type="button">Sign out</button></div>
   </div>
 </aside>
 <main class="main">
@@ -175,57 +189,57 @@ tbody tr:hover{background:#142846}
   </header>
   <section class="content">
     <div class="page-head"><div><div class="eyebrow">IT OPERATIONS CENTER</div><h1 id="pageTitle">Dashboard overview</h1><p class="subtitle" id="pageSubtitle">Monitor your devices, support requests, and IT operations.</p></div><div class="head-actions"><button class="btn" id="exportBtn"><svg viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M5 17v4h14v-4"/></svg>Export report</button><button class="btn primary" id="newTicketBtn"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>New ticket</button></div></div>
-    <div class="demo-note" id="dataNote"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7h.01"/></svg><span id="dataNoteText"><strong>Demo preview:</strong> Metrics and records below are illustrative sample data. Connect your backend to display live organization and device information.</span></div>
+    <div id="workspacePage" style="display:none"></div>
+    <div class="demo-note" id="dataNote"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7h.01"/></svg><span id="dataNoteText"><strong>Workspace data:</strong> Support tickets and device inventory are stored in your Firebase account. Device health monitoring requires an installed device agent.</span></div>
     <div class="kpis">
-      <article class="card kpi"><div class="kpi-top"><div class="kpi-label">Total Devices</div><div class="kpi-icon blue"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div></div><div class="kpi-value">128</div><div class="kpi-foot"><span class="trend">↑ 8.4%</span> <span>vs. last month</span></div></article>
-      <article class="card kpi"><div class="kpi-top"><div class="kpi-label">Devices Online</div><div class="kpi-icon green"><svg viewBox="0 0 24 24"><path d="M5 12.5 9.5 17 19 7.5"/><circle cx="12" cy="12" r="9"/></svg></div></div><div class="kpi-value">116</div><div class="kpi-foot"><span class="dot"></span><span>90.6% availability</span></div></article>
+      <article class="card kpi"><div class="kpi-top"><div class="kpi-label">Total Devices</div><div class="kpi-icon blue"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div></div><div class="kpi-value">0</div><div class="kpi-foot"><span>Saved in your inventory</span></div></article>
+      <article class="card kpi"><div class="kpi-top"><div class="kpi-label">Devices Online</div><div class="kpi-icon green"><svg viewBox="0 0 24 24"><path d="M5 12.5 9.5 17 19 7.5"/><circle cx="12" cy="12" r="9"/></svg></div></div><div class="kpi-value">0</div><div class="kpi-foot"><span class="dot"></span><span>0% marked online</span></div></article>
       <article class="card kpi"><div class="kpi-top"><div class="kpi-label">Open Tickets</div><div class="kpi-icon amber"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-5 4v-4.5a2.5 2.5 0 0 1-1-2z"/></svg></div></div><div class="kpi-value" id="openTicketKpi">12</div><div class="kpi-foot"><span class="trend down" id="urgentKpi">3 urgent</span><span>need attention</span></div></article>
-      <article class="card kpi"><div class="kpi-top"><div class="kpi-label">Avg. Resolution Time</div><div class="kpi-icon purple"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6M12 2v3"/></svg></div></div><div class="kpi-value">2.4h</div><div class="kpi-foot"><span class="trend">↓ 18%</span><span>faster this month</span></div></article>
+      <article class="card kpi"><div class="kpi-top"><div class="kpi-label">Avg. Resolution Time</div><div class="kpi-icon purple"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6M12 2v3"/></svg></div></div><div class="kpi-value">—</div><div class="kpi-foot"><span>No resolution history yet</span></div></article>
     </div>
     <div class="panels">
       <section class="card panel"><div class="panel-head"><div><div class="panel-title">Device Health Overview</div><div class="panel-sub">Device connectivity over the last 7 days</div></div><select class="select" id="periodSelect" aria-label="Chart period"><option value="7">Last 7 days</option><option value="30">Last 30 days</option></select></div>
-        <div class="chart-wrap"><svg viewBox="0 0 600 225" preserveAspectRatio="none" role="img" aria-label="Illustrative device connectivity chart"><defs><linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3B82F6" stop-opacity=".28"/><stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/></linearGradient></defs>
+        <div class="chart-wrap" style="display:grid;place-items:center;text-align:center;color:#94a3b8;padding:24px"><div><strong style="color:#e2e8f0">Historical monitoring not configured</strong><p style="max-width:340px;line-height:1.6">This chart will become live when a monitoring agent sends device check-ins. Inventory status is currently managed manually.</p></div></div><div style="display:none"><svg viewBox="0 0 600 225" preserveAspectRatio="none" role="img" aria-label="Historical chart not connected"><defs><linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3B82F6" stop-opacity=".28"/><stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/></linearGradient></defs>
           <line class="grid-line" x1="42" y1="22" x2="590" y2="22"/><line class="grid-line" x1="42" y1="65" x2="590" y2="65"/><line class="grid-line" x1="42" y1="108" x2="590" y2="108"/><line class="grid-line" x1="42" y1="151" x2="590" y2="151"/><line class="grid-line" x1="42" y1="194" x2="590" y2="194"/>
           <text class="axis-label" x="3" y="26">140</text><text class="axis-label" x="3" y="69">120</text><text class="axis-label" x="3" y="112">100</text><text class="axis-label" x="9" y="155">80</text><text class="axis-label" x="9" y="198">60</text>
           <path class="chart-area" d="M42 82 C70 75 80 88 120 67 S170 80 198 57 S246 66 276 48 S323 59 353 40 S398 55 430 34 S478 49 508 31 S558 38 590 25 L590 194 L42 194Z"/>
           <path class="chart-line" d="M42 82 C70 75 80 88 120 67 S170 80 198 57 S246 66 276 48 S323 59 353 40 S398 55 430 34 S478 49 508 31 S558 38 590 25"/>
           <circle class="chart-point" cx="120" cy="67" r="4"/><circle class="chart-point" cx="198" cy="57" r="4"/><circle class="chart-point" cx="276" cy="48" r="4"/><circle class="chart-point" cx="353" cy="40" r="4"/><circle class="chart-point" cx="430" cy="34" r="4"/><circle class="chart-point" cx="508" cy="31" r="4"/><circle class="chart-point" cx="590" cy="25" r="4"/>
           <text class="axis-label" x="42" y="216">Mon</text><text class="axis-label" x="125" y="216">Tue</text><text class="axis-label" x="207" y="216">Wed</text><text class="axis-label" x="290" y="216">Thu</text><text class="axis-label" x="372" y="216">Fri</text><text class="axis-label" x="455" y="216">Sat</text><text class="axis-label" x="565" y="216">Sun</text>
-        </svg></div><div class="legend-row"><span><i class="legend-dot" style="background:#60a5fa"></i>Online devices</span><span><i class="legend-dot" style="background:#263750"></i>Device baseline</span></div>
+        </svg></div></div><div class="legend-row"><span>Live chart pending device-agent integration</span></div>
       </section>
       <section class="card panel"><div class="panel-head"><div><div class="panel-title">Device Status</div><div class="panel-sub">Current status across your workspace</div></div><button class="link-btn" data-goto="Devices">View devices ↗</button></div>
-        <div class="status-content"><div class="donut"><svg viewBox="0 0 160 160" role="img" aria-label="Illustrative device status donut chart"><circle cx="80" cy="80" r="61" fill="none" stroke="#263750" stroke-width="17"/><circle cx="80" cy="80" r="61" fill="none" stroke="#22C55E" stroke-width="17" stroke-dasharray="350 383" stroke-dashoffset="0"/><circle cx="80" cy="80" r="61" fill="none" stroke="#64748B" stroke-width="17" stroke-dasharray="24 383" stroke-dashoffset="-354"/><circle cx="80" cy="80" r="61" fill="none" stroke="#F59E0B" stroke-width="17" stroke-dasharray="7 383" stroke-dashoffset="-383"/><circle cx="80" cy="80" r="61" fill="none" stroke="#EF4444" stroke-width="17" stroke-dasharray="2 383" stroke-dashoffset="-393"/></svg><div class="donut-center"><div class="donut-total">128</div><div class="donut-label">Total devices</div></div></div>
-          <div class="status-legend"><div class="status-item"><i class="status-color" style="background:#22c55e"></i><span>Online</span><strong>116</strong></div><div class="status-item"><i class="status-color" style="background:#64748b"></i><span>Offline</span><strong>8</strong></div><div class="status-item"><i class="status-color" style="background:#f59e0b"></i><span>Warning</span><strong>3</strong></div><div class="status-item"><i class="status-color" style="background:#ef4444"></i><span>Critical</span><strong>1</strong></div></div>
+        <div class="status-content"><div class="donut"><svg viewBox="0 0 160 160" role="img" aria-label="Device status chart based on saved inventory"><circle cx="80" cy="80" r="61" fill="none" stroke="#263750" stroke-width="17"/><circle class="donut-online" cx="80" cy="80" r="61" fill="none" stroke="#22C55E" stroke-width="17" stroke-dasharray="0 383" stroke-dashoffset="0"/><circle class="donut-offline" cx="80" cy="80" r="61" fill="none" stroke="#64748B" stroke-width="17" stroke-dasharray="0 383" stroke-dashoffset="0"/><circle class="donut-warning" cx="80" cy="80" r="61" fill="none" stroke="#F59E0B" stroke-width="17" stroke-dasharray="0 383" stroke-dashoffset="0"/><circle class="donut-other" cx="80" cy="80" r="61" fill="none" stroke="#94A3B8" stroke-width="17" stroke-dasharray="0 383" stroke-dashoffset="0"/></svg><div class="donut-center"><div class="donut-total">128</div><div class="donut-label">Total devices</div></div></div>
+          <div class="status-legend"><div class="status-item"><i class="status-color" style="background:#22c55e"></i><span>Online</span><strong>0</strong></div><div class="status-item"><i class="status-color" style="background:#64748b"></i><span>Offline</span><strong>0</strong></div><div class="status-item"><i class="status-color" style="background:#f59e0b"></i><span>Warning</span><strong>0</strong></div><div class="status-item"><i class="status-color" style="background:#94a3b8"></i><span>Registered / other</span><strong>0</strong></div></div>
         </div>
       </section>
     </div>
     <section class="card table-panel"><div class="table-head"><div class="panel-head"><div><div class="panel-title">Recent Support Tickets</div><div class="panel-sub">Track and manage the latest IT requests</div></div></div><div style="display:flex;align-items:center;gap:10px"><span class="fb-status loading" id="fbStatus"><i></i><span id="fbStatusText">Firebase: connecting…</span></span><button class="link-btn" data-goto="Support Tickets">View all tickets ↗</button></div></div>
-      <div class="table-scroll"><table id="ticketTable"><thead><tr><th>Ticket ID</th><th>Subject</th><th>Customer</th><th>Priority</th><th>Status</th><th>Last updated</th><th></th></tr></thead><tbody>
-      <tr><td class="ticket-id">#INC-2048</td><td><div class="subject">Cannot connect to company VPN</div><div class="subcell">Network &amp; connectivity</div></td><td><div class="org-cell"><span class="org-avatar">AC</span><span>Acme Consulting</span></div></td><td><span class="pill high">High</span></td><td><span class="pill progressing">In progress</span></td><td>8 min ago</td><td><button class="row-action" aria-label="Ticket options">⋯</button></td></tr>
-      <tr><td class="ticket-id">#INC-2047</td><td><div class="subject">Laptop running unusually slow</div><div class="subcell">Device performance</div></td><td><div class="org-cell"><span class="org-avatar" style="background:#3c2d5e;color:#ddd6fe">NF</span><span>Northstar Finance</span></div></td><td><span class="pill medium">Medium</span></td><td><span class="pill open">Open</span></td><td>24 min ago</td><td><button class="row-action" aria-label="Ticket options">⋯</button></td></tr>
-      <tr><td class="ticket-id">#INC-2046</td><td><div class="subject">Printer unavailable on floor 2</div><div class="subcell">Hardware &amp; peripherals</div></td><td><div class="org-cell"><span class="org-avatar" style="background:#24443a;color:#a7f3d0">GP</span><span>Greenfield Partners</span></div></td><td><span class="pill low">Low</span></td><td><span class="pill progressing">In progress</span></td><td>1 hour ago</td><td><button class="row-action" aria-label="Ticket options">⋯</button></td></tr>
-      <tr><td class="ticket-id">#INC-2045</td><td><div class="subject">New employee account setup</div><div class="subcell">Accounts &amp; access</div></td><td><div class="org-cell"><span class="org-avatar" style="background:#523b22;color:#fde68a">BM</span><span>Bluepeak Media</span></div></td><td><span class="pill medium">Medium</span></td><td><span class="pill resolved">Resolved</span></td><td>2 hours ago</td><td><button class="row-action" aria-label="Ticket options">⋯</button></td></tr>
-      </tbody></table></div>
+      <div class="table-scroll"><table id="ticketTable"><thead><tr><th>Ticket ID</th><th>Subject</th><th>Customer</th><th>Priority</th><th>Status</th><th>Last updated</th><th></th></tr></thead><tbody><tr><td colspan="7" style="text-align:center;padding:24px;color:#94a3b8">Sign in to load your tickets.</td></tr></tbody></table></div>
     </section>
     <div class="bottom-grid">
       <section class="card"><div class="table-head"><div><div class="panel-title">Recently Seen Devices</div><div class="panel-sub">Latest device activity in your workspace</div></div><button class="link-btn" data-goto="Devices">All devices ↗</button></div>
-        <div class="device-list">
-          <div class="device"><div class="device-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div><div class="device-name">OFFICE-PC-014</div><div class="device-meta">Windows 11 Pro · Acme Consulting</div></div><div class="device-status"><i class="dot"></i>Online</div></div>
-          <div class="device"><div class="device-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 18h6"/></svg></div><div><div class="device-name">LAPTOP-MK-022</div><div class="device-meta">Windows 10 Pro · Northstar Finance</div></div><div class="device-status"><i class="dot"></i>Online</div></div>
-          <div class="device"><div class="device-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div><div class="device-name">DESIGN-WS-006</div><div class="device-meta">Windows 11 Pro · Bluepeak Media</div></div><div class="device-status offline"><i class="dot" style="background:#ef4444"></i>Offline</div></div>
-        </div>
+        <div class="device-list" id="recentDeviceList"><div style="padding:18px 0;color:#94a3b8;font-size:12px">Sign in to load your devices.</div></div>
       </section>
-      <section class="card"><div class="table-head"><div><div class="panel-title">Recent Activity</div><div class="panel-sub">Latest changes across your IT workspace</div></div><button class="link-btn" id="activityBtn">View log ↗</button></div>
-        <div class="activity-list">
-          <div class="activity"><div class="activity-icon green" style="background:#153d32"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></div><div><div class="activity-text"><strong>Ticket #INC-2045</strong> was marked as resolved.</div><div class="activity-time">2 hours ago · Support team</div></div></div>
-          <div class="activity"><div class="activity-icon blue"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div><div class="activity-text">New device <strong>OFFICE-PC-014</strong> checked in.</div><div class="activity-time">3 hours ago · Device monitoring</div></div></div>
-          <div class="activity"><div class="activity-icon amber"><svg viewBox="0 0 24 24"><path d="M12 3 2.5 20h19z"/><path d="M12 9v4M12 16h.01"/></svg></div><div><div class="activity-text"><strong>Disk space warning</strong> detected on a workstation.</div><div class="activity-time">4 hours ago · Monitoring</div></div></div>
-        </div>
+      <section class="card"><div class="table-head"><div><div class="panel-title">Workspace Activity</div><div class="panel-sub">Latest changes across your IT workspace</div></div><button class="link-btn" id="activityBtn">View log ↗</button></div>
+        <div class="activity-list"><div style="padding:18px 0;color:#94a3b8;font-size:12px">No activity log is configured yet. Device check-ins and ticket audit events can be added in the next phase.</div></div>
       </section>
     </div>
-    <div class="footer">Underscore Care · IT operations made simpler · Demo interface</div>
+    <div class="footer">Underscore Care · IT operations made simpler</div>
   </section>
 </main>
+</div>
+<div class="auth-gate" id="authGate" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+  <form class="auth-card" id="authForm">
+    <div class="auth-brand"><div class="brand-mark">_</div><div><div class="brand-name">Underscore Care</div><div class="brand-sub">IT operations platform</div></div></div>
+    <h2 id="authTitle">Sign in to your workspace</h2>
+    <p>Use your Underscore Care account to access your support workspace. Create an account if this is your first visit.</p>
+    <label for="authEmail">Email address</label><input id="authEmail" type="email" autocomplete="email" required maxlength="254" placeholder="you@company.com">
+    <label for="authPassword">Password</label><input id="authPassword" type="password" autocomplete="current-password" required minlength="6" placeholder="At least 6 characters">
+    <button class="btn primary auth-submit" id="authSubmit" type="submit">Sign in</button>
+    <button class="btn auth-switch" id="authModeBtn" type="button">New here? Create an account</button>
+    <div class="auth-error" id="authError" role="alert"></div>
+  </form>
 </div>
 <div class="toast" id="toast" role="status"></div>
 
@@ -239,10 +253,19 @@ tbody tr:hover{background:#142846}
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-analytics.js";
 import {
+  getAuth, onAuthStateChanged, signInWithEmailAndPassword,
+  createUserWithEmailAndPassword, signOut
+} from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
+import {
   getFirestore,
   collection,
   getDocs,
   addDoc,
+  query,
+  where,
+  doc,
+  updateDoc,
+  deleteDoc,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
 
@@ -263,6 +286,8 @@ const firebaseConfig = {
    Initialize Firebase
    ------------------------------------------------------------------ */
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+let currentUser = null;
 
 let analytics = null;
 try {
@@ -280,7 +305,7 @@ try {
 }
 
 // Expose for debugging / future extension
-window.underscoreCare = { app, analytics, db };
+window.underscoreCare = { app, analytics, db, auth };
 
 /* ==================================================================
    UI LOGIC
@@ -341,23 +366,121 @@ const statusClass = (s) => {
   return 'open';
 };
 
+/* ---------- Workspace pages and live device inventory ---------- */
+const workspacePage = document.getElementById('workspacePage');
+const contentRoot = document.querySelector('.content');
+const dashboardChildren = Array.from(contentRoot.children).filter(el => !['page-head','workspacePage'].includes(el.id) && !el.classList.contains('page-head'));
+let cachedDevices = [];
+
+function showWorkspacePage(page) {
+  document.getElementById('crumb').textContent = page;
+  document.getElementById('pageTitle').textContent = page === 'Dashboard' ? 'Dashboard overview' : page;
+  document.getElementById('pageSubtitle').textContent = page === 'Dashboard' ? 'Your live support tickets and registered device inventory.' : page === 'Devices' ? 'Register and manage devices belonging to your workspace.' : page === 'Support Tickets' ? 'Review the support requests saved to your account.' : 'This section is not connected yet.';
+  const isDashboard = page === 'Dashboard';
+  dashboardChildren.forEach(el => el.style.display = isDashboard ? '' : 'none');
+  workspacePage.style.display = isDashboard ? 'none' : 'block';
+  if (isDashboard) return;
+  if (page === 'Devices') renderDevicesPage();
+  else if (page === 'Support Tickets') renderTicketsPage();
+  else workspacePage.innerHTML = '<section class="card" style="padding:24px"><h2 style="margin-top:0">'+esc(page)+'</h2><p style="color:#94a3b8">This module is not connected yet. The Devices and Support Tickets modules are available now.</p></section>';
+}
+
+function renderDevicesPage() {
+  workspacePage.innerHTML = `
+    <section class="card" style="padding:20px;margin-bottom:18px">
+      <div class="panel-head"><div><div class="panel-title">Register a device</div><div class="panel-sub">Save a workstation, laptop, server, printer, or network device to your Firebase inventory.</div></div></div>
+      <form id="deviceForm" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:18px">
+        <label style="color:#94a3b8;font-size:12px">Device name<input required maxlength="80" name="name" placeholder="e.g. OFFICE-PC-01" style="display:block;width:100%;margin-top:7px;padding:11px;border-radius:8px;border:1px solid #263750;background:#081426;color:#fff"></label>
+        <label style="color:#94a3b8;font-size:12px">Type<select name="type" style="display:block;width:100%;margin-top:7px;padding:11px;border-radius:8px;border:1px solid #263750;background:#081426;color:#fff"><option>Workstation</option><option>Laptop</option><option>Server</option><option>Printer</option><option>Router</option><option>Switch</option><option>Other</option></select></label>
+        <label style="color:#94a3b8;font-size:12px">Operating system / model<input maxlength="100" name="os" placeholder="e.g. Windows 11 Pro" style="display:block;width:100%;margin-top:7px;padding:11px;border-radius:8px;border:1px solid #263750;background:#081426;color:#fff"></label>
+        <label style="color:#94a3b8;font-size:12px">Customer / location<input maxlength="100" name="customer" placeholder="e.g. Main Office" style="display:block;width:100%;margin-top:7px;padding:11px;border-radius:8px;border:1px solid #263750;background:#081426;color:#fff"></label>
+        <label style="color:#94a3b8;font-size:12px">Inventory status<select name="status" style="display:block;width:100%;margin-top:7px;padding:11px;border-radius:8px;border:1px solid #263750;background:#081426;color:#fff"><option value="registered">Registered</option><option value="online">Online (manual)</option><option value="offline">Offline (manual)</option><option value="warning">Warning</option></select></label>
+        <div style="display:flex;align-items:end"><button class="btn primary" type="submit" style="width:100%;justify-content:center">Save device</button></div>
+      </form>
+    </section>
+    <section class="card table-panel"><div class="table-head"><div><div class="panel-title">Device inventory</div><div class="panel-sub" id="deviceCountText">Loading saved devices…</div></div><button class="btn" id="refreshDevicesBtn" type="button">Refresh</button></div>
+      <div class="table-scroll"><table id="deviceTable"><thead><tr><th>Name</th><th>Type</th><th>OS / model</th><th>Customer / location</th><th>Status</th><th>Actions</th></tr></thead><tbody><tr><td colspan="6" style="padding:24px;text-align:center;color:#94a3b8">Loading…</td></tr></tbody></table></div></section>`;
+  document.getElementById('deviceForm').addEventListener('submit', saveDevice);
+  document.getElementById('refreshDevicesBtn').addEventListener('click', loadDevices);
+  renderDeviceTable(cachedDevices);
+  loadDevices();
+}
+
+async function saveDevice(event) {
+  event.preventDefault();
+  if (!currentUser || !db) return notify('Sign in and connect Firebase before saving devices.');
+  const form = event.currentTarget; const values = Object.fromEntries(new FormData(form).entries());
+  const saveButton = form.querySelector('button[type="submit"]'); saveButton.disabled = true; saveButton.textContent = 'Saving…';
+  try {
+    await addDoc(collection(db, 'devices'), { ...values, ownerUid: currentUser.uid, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
+    form.reset(); notify('Device saved to your Firebase inventory.'); await loadDevices();
+  } catch (err) { console.error('[Underscore Care] Device save failed:', err); notify('Could not save device: ' + (err.code || err.message)); }
+  finally { saveButton.disabled = false; saveButton.textContent = 'Save device'; }
+}
+
+function renderDeviceTable(devices) {
+  const tbody = document.querySelector('#deviceTable tbody'); if (!tbody) return;
+  const count = document.getElementById('deviceCountText'); if (count) count.textContent = devices.length + (devices.length === 1 ? ' device saved in your inventory' : ' devices saved in your inventory');
+  if (!devices.length) { tbody.innerHTML = '<tr><td colspan="6" style="padding:24px;text-align:center;color:#94a3b8">No devices saved yet. Use the form above to register your first device.</td></tr>'; return; }
+  tbody.innerHTML = devices.map(d => `<tr><td><strong>${esc(d.name)}</strong></td><td>${esc(d.type || 'Other')}</td><td>${esc(d.os || '—')}</td><td>${esc(d.customer || '—')}</td><td><select data-device-status="${esc(d.id)}" style="padding:6px;border-radius:6px;border:1px solid #263750;background:#081426;color:#fff"><option value="registered" ${d.status==='registered'?'selected':''}>Registered</option><option value="online" ${d.status==='online'?'selected':''}>Online (manual)</option><option value="offline" ${d.status==='offline'?'selected':''}>Offline (manual)</option><option value="warning" ${d.status==='warning'?'selected':''}>Warning</option></select></td><td><button class="btn" data-edit-device="${esc(d.id)}" type="button">Edit</button> <button class="btn" data-delete-device="${esc(d.id)}" type="button">Delete</button></td></tr>`).join('');
+  tbody.querySelectorAll('[data-device-status]').forEach(sel => sel.addEventListener('change', async () => { const d = devices.find(x=>x.id===sel.dataset.deviceStatus); if(d) await patchDevice(d.id,{status:sel.value}); }));
+  tbody.querySelectorAll('[data-edit-device]').forEach(btn => btn.addEventListener('click', async () => { const d=devices.find(x=>x.id===btn.dataset.editDevice); if(!d)return; const name=prompt('Device name:',d.name||''); if(name===null)return; const customer=prompt('Customer / location:',d.customer||''); if(customer===null)return; const os=prompt('Operating system / model:',d.os||''); if(os===null)return; await patchDevice(d.id,{name:name.trim(),customer:customer.trim(),os:os.trim()}); }));
+  tbody.querySelectorAll('[data-delete-device]').forEach(btn => btn.addEventListener('click', async () => { const d=devices.find(x=>x.id===btn.dataset.deleteDevice); if(!d || !confirm('Delete device "'+d.name+'" from your inventory?'))return; try { await deleteDoc(doc(db,'devices',d.id)); notify('Device deleted.'); await loadDevices(); } catch(err) { console.error(err); notify('Delete failed: '+(err.code||err.message)); } }));
+}
+
+async function patchDevice(id, fields) {
+  if(!currentUser || !db)return;
+  try { await updateDoc(doc(db,'devices',id),{...fields,updatedAt:serverTimestamp()}); notify('Device updated.'); await loadDevices(); }
+  catch(err){console.error(err);notify('Update failed: '+(err.code||err.message));}
+}
+
+async function loadDevices() {
+  if(!currentUser || !db)return;
+  try {
+    const snap=await getDocs(query(collection(db,'devices'),where('ownerUid','==',currentUser.uid)));
+    cachedDevices=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(a.name||'').localeCompare(b.name||''));
+    renderDeviceTable(cachedDevices); updateDeviceDashboard(cachedDevices);
+  } catch(err) {
+    console.error('[Underscore Care] Device read failed:',err);
+    const tbody=document.querySelector('#deviceTable tbody'); if(tbody)tbody.innerHTML='<tr><td colspan="6" style="padding:24px;text-align:center;color:#fca5a5">Could not load devices ('+esc(err.code||'permission-denied')+'). Check the Firestore devices rules.</td></tr>';
+  }
+}
+
+function updateDeviceDashboard(devices) {
+  const total=devices.length, online=devices.filter(d=>d.status==='online').length, offline=devices.filter(d=>d.status==='offline').length, warning=devices.filter(d=>d.status==='warning').length;
+  const kpis=document.querySelectorAll('.kpi-value'); if(kpis[0])kpis[0].textContent=total; if(kpis[1])kpis[1].textContent=online;
+  const foot=document.querySelectorAll('.kpi-foot'); if(foot[1])foot[1].innerHTML='<span class="dot"></span><span>'+(total?Math.round(online/total*100):0)+'% marked online</span>';
+  const donutTotal=document.querySelector('.donut-total'); if(donutTotal)donutTotal.textContent=total;
+  const circumference=2*Math.PI*61;
+  const segments=[['.donut-online',online],['.donut-offline',offline],['.donut-warning',warning],['.donut-other',Math.max(0,total-online-offline-warning)]];
+  let offset=0; for(const [selector,count] of segments){const circle=document.querySelector(selector);if(!circle)continue;const arc=total?circumference*count/total:0;circle.setAttribute('stroke-dasharray',arc+' '+Math.max(0,circumference-arc));circle.setAttribute('stroke-dashoffset',String(-offset));offset+=arc;}
+  const legend=document.querySelector('.status-legend'); if(legend)legend.innerHTML=`<div class="status-item"><i class="status-color" style="background:#22c55e"></i><span>Online</span><strong>${online}</strong></div><div class="status-item"><i class="status-color" style="background:#64748b"></i><span>Offline</span><strong>${offline}</strong></div><div class="status-item"><i class="status-color" style="background:#f59e0b"></i><span>Warning</span><strong>${warning}</strong></div><div class="status-item"><i class="status-color" style="background:#94a3b8"></i><span>Registered / other</span><strong>${total-online-offline-warning}</strong></div>`;
+  const navCount=document.querySelector('#mainNav button[data-page="Devices"] .nav-count'); if(navCount)navCount.textContent=total;
+  const recent=document.getElementById('recentDeviceList'); if(recent)recent.innerHTML=devices.length?devices.slice(0,4).map(d=>`<div class="device"><div class="device-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div><div class="device-name">${esc(d.name)}</div><div class="device-meta">${esc(d.os||d.type||'Device')} · ${esc(d.customer||'No location')}</div></div><div class="device-status ${d.status==='offline'?'offline':''}"><i class="dot" style="${d.status==='offline'?'background:#ef4444':''}"></i>${esc((d.status||'registered').replace(/^./,c=>c.toUpperCase()))}</div></div>`).join(''):'<div style="padding:18px 0;color:#94a3b8;font-size:12px">No devices saved yet. Open Devices to register one.</div>';
+}
+
+function renderTicketsPage() {
+  workspacePage.innerHTML='<section class="card table-panel"><div class="table-head"><div><div class="panel-title">Support tickets</div><div class="panel-sub">Tickets saved to your Firebase account</div></div><button class="btn primary" id="pageNewTicketBtn" type="button">+ New ticket</button></div><div class="table-scroll"><table><thead><tr><th>Ticket ID</th><th>Subject</th><th>Customer</th><th>Priority</th><th>Status</th><th>Updated</th><th>Action</th></tr></thead><tbody id="allTicketsBody"><tr><td colspan="7" style="padding:24px;text-align:center;color:#94a3b8">Loading tickets…</td></tr></tbody></table></div></section>';
+  document.getElementById('pageNewTicketBtn').addEventListener('click',()=>document.getElementById('newTicketBtn').click());
+  loadAllTickets();
+}
+
+async function loadAllTickets() {
+  const tbody=document.getElementById('allTicketsBody'); if(!tbody || !currentUser || !db)return;
+  try { const snap=await getDocs(query(collection(db,'tickets'),where('ownerUid','==',currentUser.uid))); const ts=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(toDate(b.updatedAt||b.createdAt)?.getTime()||0)-(toDate(a.updatedAt||a.createdAt)?.getTime()||0));
+    tbody.innerHTML=ts.length?ts.map(t=>`<tr><td>${esc(t.code||t.id.slice(0,8))}</td><td>${esc(t.subject||'Untitled')}</td><td>${esc(t.customer||'—')}</td><td><span class="pill ${priorityClass(t.priority)}">${esc(t.priority||'low')}</span></td><td><select data-ticket-status="${esc(t.id)}" style="padding:6px;border-radius:6px;border:1px solid #263750;background:#081426;color:#fff"><option value="open" ${t.status==='open'?'selected':''}>Open</option><option value="in-progress" ${t.status==='in-progress'?'selected':''}>In progress</option><option value="resolved" ${t.status==='resolved'?'selected':''}>Resolved</option></select></td><td>${esc(timeAgo(t.updatedAt||t.createdAt))}</td><td><button class="btn" data-ticket-delete="${esc(t.id)}" type="button">Delete</button></td></tr>`).join(''):'<tr><td colspan="7" style="padding:24px;text-align:center;color:#94a3b8">No tickets yet. Create your first ticket.</td></tr>';
+    tbody.querySelectorAll('[data-ticket-status]').forEach(sel=>sel.addEventListener('change',async()=>{try{await updateDoc(doc(db,'tickets',sel.dataset.ticketStatus),{status:sel.value,updatedAt:serverTimestamp()});notify('Ticket status updated.');await loadTickets();}catch(e){notify('Could not update ticket: '+(e.code||e.message));}}));
+    tbody.querySelectorAll('[data-ticket-delete]').forEach(btn=>btn.addEventListener('click',async()=>{if(!confirm('Delete this ticket?'))return;try{await deleteDoc(doc(db,'tickets',btn.dataset.ticketDelete));notify('Ticket deleted.');await loadAllTickets();await loadTickets();}catch(e){notify('Could not delete ticket: '+(e.code||e.message));}}));
+  } catch(err){console.error(err);tbody.innerHTML='<tr><td colspan="7" style="padding:24px;text-align:center;color:#fca5a5">Could not load tickets ('+esc(err.code||'permission-denied')+').</td></tr>'; }
+}
+
 /* ---------- Sidebar navigation ---------- */
 document.getElementById('mainNav').addEventListener('click', e => {
   const b = e.target.closest('button[data-page]');
   if (!b) return;
   document.querySelectorAll('#mainNav button').forEach(x => x.classList.remove('active'));
   b.classList.add('active');
-  const page = b.dataset.page;
-  document.getElementById('crumb').textContent = page;
-
-  if (page === 'Dashboard') {
-    document.getElementById('pageTitle').textContent = 'Dashboard overview';
-    document.getElementById('pageSubtitle').textContent = 'Monitor your devices, support requests, and IT operations.';
-  } else {
-    document.getElementById('pageTitle').textContent = page;
-    document.getElementById('pageSubtitle').textContent = 'Manage and review ' + page.toLowerCase() + ' for your IT workspace.';
-    notify(page + ' view is a navigation placeholder in this demo.');
-  }
+  showWorkspacePage(b.dataset.page);
   if (innerWidth <= 900) document.getElementById('sidebar').classList.remove('open');
 });
 
@@ -370,10 +493,14 @@ document.getElementById('menuBtn').addEventListener('click', () =>
   document.getElementById('sidebar').classList.toggle('open'));
 
 document.getElementById('notificationBtn').addEventListener('click', () =>
-  notify('You have 3 demo alerts: 1 critical device, 2 pending tickets.'));
+  notify('Live device alerts are not configured yet.'));
 
 /* ---------- New ticket → writes to Firestore when available ---------- */
 document.getElementById('newTicketBtn').addEventListener('click', async () => {
+  if (!currentUser) {
+    notify('Please sign in before creating a ticket.');
+    return;
+  }
   if (!db) {
     notify('Ticket creation needs a Firestore connection.');
     return;
@@ -386,7 +513,8 @@ document.getElementById('newTicketBtn').addEventListener('click', async () => {
       code: 'INC-' + Math.floor(1000 + Math.random() * 9000),
       subject: subject.slice(0, 140),
       category: 'General',
-      customer: 'Unassigned',
+      customer: currentUser.email || 'My workspace',
+      ownerUid: currentUser.uid,
       priority: 'medium',
       status: 'open',
       createdAt: serverTimestamp(),
@@ -394,6 +522,7 @@ document.getElementById('newTicketBtn').addEventListener('click', async () => {
     });
     notify('Ticket created in Firestore (' + ref.id.slice(0, 6) + '…).');
     loadTickets();
+    if (document.getElementById('allTicketsBody')) loadAllTickets();
   } catch (err) {
     console.error(err);
     notify('Could not create ticket: ' + (err?.code || err?.message || 'unknown error'));
@@ -461,6 +590,7 @@ function setFbStatus(state, text) {
 
 function renderTicketRows(tickets) {
   const tbody = document.querySelector('#ticketTable tbody');
+  if (!tickets.length) { tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:24px;color:#94a3b8">No tickets yet. Create a ticket to get started.</td></tr>'; return; }
   tbody.innerHTML = tickets.map(t => `
     <tr>
       <td class="ticket-id">${esc(t.code || ('#' + String(t.id).slice(0, 8)))}</td>
@@ -500,11 +630,15 @@ async function loadTickets() {
   setFbStatus('loading', 'Firebase: loading…');
 
   try {
-    const snap = await getDocs(collection(db, 'tickets'));
+    if (!currentUser) return;
+    const snap = await getDocs(query(collection(db, 'tickets'), where('ownerUid', '==', currentUser.uid)));
 
     if (snap.empty) {
+      renderTicketRows([]);
+      updateTicketStats([]);
       setFbStatus('online', 'Firebase: connected');
-      dataNoteText.innerHTML = '<strong>Firebase connected:</strong> the <code>tickets</code> collection is empty, so sample data is shown below. Add documents to <code>tickets</code> to see live records.';
+      dataNote.classList.add('live');
+      dataNoteText.innerHTML = '<strong>Live data:</strong> no tickets found for this account yet. Select New ticket to create your first ticket.';
       return;
     }
 
@@ -528,12 +662,74 @@ async function loadTickets() {
   } catch (err) {
     console.error('[Underscore Care] Firestore read failed:', err);
     setFbStatus('error', 'Firebase: read blocked');
-    dataNoteText.innerHTML = '<strong>Demo preview:</strong> could not read the <code>tickets</code> collection (' +
-      esc(err?.code || 'permission-denied') + '). Sample data is shown below — check your Firestore security rules.';
+    dataNoteText.innerHTML = '<strong>Firebase connection issue:</strong> could not read the <code>tickets</code> collection (' +
+      esc(err?.code || 'permission-denied') + '). Check your Firestore security rules and sign-in status.';
   }
 }
 
-loadTickets();
+
+/* ---------- Authentication gate ---------- */
+const authGate = document.getElementById('authGate');
+const authForm = document.getElementById('authForm');
+const authSubmit = document.getElementById('authSubmit');
+const authModeBtn = document.getElementById('authModeBtn');
+const authError = document.getElementById('authError');
+let authMode = 'signin';
+
+authModeBtn.addEventListener('click', () => {
+  authMode = authMode === 'signin' ? 'signup' : 'signin';
+  document.getElementById('authTitle').textContent = authMode === 'signin' ? 'Sign in to your workspace' : 'Create your account';
+  authSubmit.textContent = authMode === 'signin' ? 'Sign in' : 'Create account';
+  authModeBtn.textContent = authMode === 'signin' ? 'New here? Create an account' : 'Already registered? Sign in';
+  document.getElementById('authPassword').autocomplete = authMode === 'signin' ? 'current-password' : 'new-password';
+  authError.style.display = 'none';
+});
+
+authForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  authError.style.display = 'none';
+  authSubmit.disabled = true;
+  authSubmit.textContent = authMode === 'signin' ? 'Signing in…' : 'Creating account…';
+  const email = document.getElementById('authEmail').value.trim();
+  const password = document.getElementById('authPassword').value;
+  try {
+    if (authMode === 'signin') await signInWithEmailAndPassword(auth, email, password);
+    else await createUserWithEmailAndPassword(auth, email, password);
+  } catch (error) {
+    const messages = {
+      'auth/invalid-credential': 'Email or password is incorrect.',
+      'auth/email-already-in-use': 'An account already exists for this email. Sign in instead.',
+      'auth/weak-password': 'Choose a stronger password with at least 6 characters.',
+      'auth/invalid-email': 'Enter a valid email address.',
+      'auth/operation-not-allowed': 'Enable Email/Password in Firebase Authentication settings.',
+      'auth/too-many-requests': 'Too many attempts. Wait a moment and try again.'
+    };
+    authError.textContent = messages[error.code] || ('Authentication failed: ' + (error.code || error.message));
+    authError.style.display = 'block';
+  } finally {
+    authSubmit.disabled = false;
+    authSubmit.textContent = authMode === 'signin' ? 'Sign in' : 'Create account';
+  }
+});
+
+document.getElementById('signOutBtn').addEventListener('click', async () => {
+  try { await signOut(auth); } catch (error) { notify('Sign out failed: ' + (error.code || error.message)); }
+});
+
+onAuthStateChanged(auth, (user) => {
+  currentUser = user;
+  authGate.classList.toggle('show', !user);
+  document.getElementById('signedInEmail').textContent = user?.email || 'Not signed in';
+  document.querySelector('.user-name').textContent = user?.email ? user.email.split('@')[0] : 'Workspace Admin';
+  document.querySelector('.avatar[title="Workspace Admin"]').textContent = user?.email ? initials(user.email) : 'MG';
+  if (user) { loadTickets(); loadDevices(); }
+  else {
+    cachedDevices = []; updateDeviceDashboard([]);
+    setFbStatus('loading', 'Firebase: sign in required');
+    renderTicketRows([]);
+    updateTicketStats([]);
+  }
+});
 </script>
 </body>
 </html>
